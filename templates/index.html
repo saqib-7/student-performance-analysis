@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Student Performance Analyzer</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='site.css') }}">
+</head>
+<body class="home-page">
+  <main class="page-shell">
+    <section class="home-card">
+      <span class="eyebrow">Student performance analysis</span>
+      <h1>Exam scores, shown simply.</h1>
+      <p>
+        This small dashboard looks at math, reading, and writing scores for 1,000 students.
+        You can filter the dataset by gender, review the main averages, and scan the charts
+        without dealing with a noisy interface.
+      </p>
+
+      <div class="home-actions">
+        <a href="/dashboard" class="button">View dashboard</a>
+        <span class="meta-note">Dataset used: Students Performance in Exams</span>
+      </div>
+
+      <ul class="feature-list">
+        <li>See average math, reading, and writing scores at a glance.</li>
+        <li>Switch between all students, male students, and female students.</li>
+        <li>Review four charts for distribution, comparison, and pass rate.</li>
+      </ul>
+    </section>
+  </main>
+</body>
+</html>

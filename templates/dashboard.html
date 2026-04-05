@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dashboard - Student Performance</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='site.css') }}">
+</head>
+<body class="dashboard-page">
+  <main class="page-shell">
+    <header class="dashboard-header">
+      <div>
+        <span class="eyebrow">Student performance dashboard</span>
+        <h1>Score patterns across the dataset</h1>
+        <p>
+          A quiet summary of the dataset with a simple gender filter and four charts for quick review.
+        </p>
+      </div>
+      <a href="/" class="back-link">Back to home</a>
+    </header>
+
+    <section class="panel filter-panel">
+      <form class="filter-form" method="POST" action="/dashboard">
+        <div class="field-group">
+          <label for="gender">Filter by gender</label>
+          <select id="gender" name="gender">
+            <option value="All" {% if gender_filter == 'All' %}selected{% endif %}>All students</option>
+            <option value="male" {% if gender_filter == 'male' %}selected{% endif %}>Male students</option>
+            <option value="female" {% if gender_filter == 'female' %}selected{% endif %}>Female students</option>
+          </select>
+        </div>
+        <button type="submit">Update view</button>
+      </form>
+    </section>
+
+    <section class="stats-grid">
+      <article class="panel stat-card">
+        <div class="label">Total students</div>
+        <div class="value">{{ stats.total_students }}</div>
+      </article>
+      <article class="panel stat-card">
+        <div class="label">Average math</div>
+        <div class="value">{{ stats.avg_math }}</div>
+      </article>
+      <article class="panel stat-card">
+        <div class="label">Average reading</div>
+        <div class="value">{{ stats.avg_reading }}</div>
+      </article>
+      <article class="panel stat-card">
+        <div class="label">Average writing</div>
+        <div class="value">{{ stats.avg_writing }}</div>
+      </article>
+      <article class="panel stat-card">
+        <div class="label">Pass rate</div>
+        <div class="value success">{{ stats.pass_pct }}%</div>
+      </article>
+      <article class="panel stat-card">
+        <div class="label">Fail rate</div>
+        <div class="value danger">{{ stats.fail_pct }}%</div>
+      </article>
+    </section>
+
+    <section class="charts-grid">
+      <article class="panel chart-card">
+        <h2>Average score by gender</h2>
+        <p>Compare average math, reading, and writing marks for each group.</p>
+        <img src="data:image/png;base64,{{ chart1 }}" alt="Bar chart showing average scores by gender">
+      </article>
+
+      <article class="panel chart-card">
+        <h2>Math score distribution</h2>
+        <p>See where math scores are clustered across the filtered set.</p>
+        <img src="data:image/png;base64,{{ chart2 }}" alt="Histogram showing math score distribution">
+      </article>
+
+      <article class="panel chart-card">
+        <h2>Reading and writing relationship</h2>
+        <p>Reading and writing scores are plotted together to show pass and fail groups.</p>
+        <img src="data:image/png;base64,{{ chart3 }}" alt="Scatter plot comparing reading and writing scores">
+      </article>
+
+      <article class="panel chart-card">
+        <h2>Pass and fail split</h2>
+        <p>A quick look at the overall pass rate in the current view.</p>
+        <img src="data:image/png;base64,{{ chart4 }}" alt="Pie chart showing pass and fail percentage">
+      </article>
+    </section>
+  </main>
+</body>
+</html>
